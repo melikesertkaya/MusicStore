@@ -1,4 +1,6 @@
-﻿using MainMusicStore.Models;
+﻿using MainMusicStore.DataAccess.IMainRepository;
+using MainMusicStore.Models;
+using MainMusicStore.Models.DbModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,15 +15,18 @@ namespace MainMusicStore.Area.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _uow;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IUnitOfWork uow)
         {
             _logger = logger;
+            _uow = uow;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Product> productsList = _uow.Product.GetAll(includeProperties: "Category,CoverType");
+            return View(productsList);
         }
 
         public IActionResult Privacy()

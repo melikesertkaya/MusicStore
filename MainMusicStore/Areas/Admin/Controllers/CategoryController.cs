@@ -29,18 +29,18 @@ namespace MainMusicStore.Areas.Admin.Controllers
         #region Apı Calls
         public IActionResult GetAll()
         {
-            var allObj = _uow.category.GetAll();
+            var allObj = _uow.Category.GetAll();
             return Json(new { data = allObj });
         }
 
        [HttpDelete]
         public IActionResult Delete(int id)
         {
-            var deleteData = _uow.category.Get(id);
+            var deleteData = _uow.Category.Get(id);
             if (deleteData == null)
                 return Json(new { success = false, message = "Data Not Found!" });
 
-            _uow.category.Remove(deleteData);
+            _uow.Category.Remove(deleteData);
             _uow.Save();
             return Json(new { success = true, message = "Delete Operation Successfully" });
         }
@@ -57,7 +57,7 @@ namespace MainMusicStore.Areas.Admin.Controllers
                 //this for create
                 return View(cat);
             }
-            cat = _uow.category.Get((int)id);
+            cat = _uow.Category.Get((int)id);
             if (cat != null)
             {
                 return View(cat);
@@ -74,12 +74,12 @@ namespace MainMusicStore.Areas.Admin.Controllers
                 if (category.Id==0)
                 {
                     //create
-                    _uow.category.Add(category);
+                    _uow.Category.Add(category);
                 }
                 else
                 {
                     //update
-                    _uow.category.Update(category);
+                    _uow.Category.Update(category);
                 }
                 _uow.Save();
                 return RedirectToAction("Index");

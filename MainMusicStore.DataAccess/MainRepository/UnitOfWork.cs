@@ -1,5 +1,6 @@
 ﻿using MainMusicStore.Data;
 using MainMusicStore.DataAccess.IMainRepository;
+using MainMusicStore.Models.DbModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,12 +13,15 @@ namespace MainMusicStore.DataAccess.MainRepository
        public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
-            category = new CategoryRepository(_db);
+            Category = new CategoryRepository(_db);
+            Product = new ProductRepository(_db);
             CoverType= new CoverTypeRepository(_db);
             sp_call = new SPCallRepository(_db);
         }
 
-        public ICategoryRepository category { get; private set;}
+        public ICategoryRepository Category { get; private set;}
+
+        public IProductRepository Product { get; private set;}
 
         public ISPCallRepository sp_call { get; private set; }
 
