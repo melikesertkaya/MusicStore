@@ -15,6 +15,10 @@ namespace MainMusicStore.Utility
         public const string Proc_CoverType_Update = "usp_UpdateCoverType";
 
         //-------------------------------------------------//
+        public const string  Role_User_Indi = "Individual Customer";
+        public const string  Role_User_Company = "Company Customer";
+        public const string  Role_User_Admin = "Admin";
+        public const string  Role_User_Employee = "_Employee";
     }
 }
 
